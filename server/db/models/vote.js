@@ -13,8 +13,8 @@ const Vote = db.define('votes', {
   sessionId: {
     type: Sequelize.STRING,
     allowNull: false,
+    unique: 'userSession'
   },
-  unique: 'userSession'
 })
 
 module.exports = Vote
