@@ -38,7 +38,7 @@ module.exports = io => {
     console.log(`A socket connection to the server has been made: ${socket.id}`)
     const info = await getGithubInfo()
     socket.emit('server:initial-data', info)
-    setInterval(() => {
+    setTimeout(() => {
       let newData = initData.map(framework => ({...framework, stars: framework.stars + 2}))
       socket.emit('server:new-data', newData)
       initData = newData

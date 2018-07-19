@@ -2,6 +2,7 @@ const express = require('express')
 const volleyball = require('volleyball')
 const bodyParser = require('body-parser')
 const compression = require('compression')
+const session = require('express-session')
 const path = require('path')
 const PORT = process.env.PORT || 8080
 const db = require('./db')
@@ -18,6 +19,11 @@ const createApp = () => {
   app.use(bodyParser.json())
   app.use(bodyParser.urlencoded({extended: true}))
   app.use(compression())
+  app.use(session({
+    secret: process.env.SESSION_SECRET || 'LaunchPad is amazing',
+    resave: false,
+    saveUninitialized: true,
+  }))
 
   // API routes
   app.use('/api', require('./api'))
