@@ -6,6 +6,7 @@ const path = require('path')
 const PORT = process.env.PORT || 8080
 const db = require('./db')
 const app = express()
+const socketio = require('socket.io')
 
 module.exports = app
 
@@ -39,6 +40,9 @@ const startListening = () => {
   const server = app.listen(PORT, () => {
     console.log(`Keep calm and deploy on ${PORT}`)
   })
+
+  const io = socketio(server)
+  require('./socket')(io)
 }
 
 const syncDb = () => db.sync()
