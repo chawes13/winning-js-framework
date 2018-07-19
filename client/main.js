@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { createGetVotesThunk } from './store'
-
+import VoteForm from './components/vote-form'
 
 class Main extends Component {
 
@@ -34,6 +34,7 @@ class Main extends Component {
             </div>
           ))
         }
+      <VoteForm frameworks={frameworks} />
       </div>
     )
   }
