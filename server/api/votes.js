@@ -8,7 +8,7 @@ router.get('/', async (req, res, next) => {
   try {
     const totalVotes = Sequelize.fn('COUNT', Sequelize.col('votes.id'))
     const frameworks = await Framework.findAll({
-      attributes: ['name', 'githubUrl', [totalVotes, 'totalVotes']],
+      attributes: ['name', [totalVotes, 'totalVotes']],
       include: [{ model: Vote, required: false, attributes: [] }],
       group: [Sequelize.col('frameworks.id')],
       order: [[totalVotes, 'DESC'], ['updatedAt', 'DESC']],
