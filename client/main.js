@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { createGetVotesThunk } from './store'
 import VoteForm from './components/vote-form'
 import FrameworkTable from './components/framework-table'
-import { Container } from 'semantic-ui-react'
+import { Container, Dimmer, Loader } from 'semantic-ui-react'
 
 class Main extends Component {
 
@@ -13,7 +13,13 @@ class Main extends Component {
 
   render() {
     const { frameworks, votes, loading, error } = this.props
-    if (frameworks.length === 0 && loading) return <div>Loading...</div> // TODO: add spinner
+    if (frameworks.length === 0 && loading) return (
+      <div>
+        <Dimmer active inverted>
+          <Loader inverted content="Loading..." />
+        </Dimmer>
+      </div>
+    )
     if (error) return <div>Oops! An error occurred: {error} </div>
 
     return (
