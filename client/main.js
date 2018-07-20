@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { createGetVotesThunk } from './store'
 import VoteForm from './components/vote-form'
+import FrameworkTable from './components/framework-table'
 
 class Main extends Component {
 
@@ -17,14 +18,7 @@ class Main extends Component {
     return (
       <div>
         <h2>Frameworks</h2>
-        {
-          frameworks.map(framework => (
-            <div key={framework.id}>
-              <p>{framework.name}</p>
-              <p>{framework.stars}</p>
-            </div>
-          ))
-        }
+          <FrameworkTable frameworks={frameworks} />
         <h2>Votes</h2>
         {
           votes.map(vote => (

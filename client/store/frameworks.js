@@ -45,7 +45,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         isFetching: false,
-        error: '',
+        errorMsg: '',
         data: action.frameworks,
       }
     case GET_VOTES:
