@@ -20,7 +20,7 @@ const createApp = () => {
   app.use(bodyParser.urlencoded({extended: true}))
   app.use(compression())
   app.use(session({
-    secret: process.env.SESSION_SECRET || 'LaunchPad is amazing',
+    secret: process.env.SESSION_SECRET || "LaunchPad is amazing, but that's no secret",
     resave: false,
     saveUninitialized: true,
   }))

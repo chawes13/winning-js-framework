@@ -5,37 +5,16 @@ const Framework = db.define('frameworks', {
   name: {
     type: Sequelize.STRING,
     allowNull: false,
-  },
-  githubUrl: {
-    type: Sequelize.STRING,
     validate: {
-      isUrl: true,
+      notEmpty: true,
     }
   },
-  stars: {
-    type: Sequelize.INTEGER,
+  githubPath: {
+    type: Sequelize.STRING,
     allowNull: false,
-    defaultValue: 0,
-  },
-  mergedPullRequests: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
-    defaultValue: 0,
-  },
-  proposedPullRequests: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
-    defaultValue: 0,
-  },
-  newIssues: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
-    defaultValue: 0,
-  },
-  closedIssues: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
-    defaultValue: 0,
+    validate: {
+      notEmpty: true,
+    }
   },
 })
 

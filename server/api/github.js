@@ -1,18 +1,45 @@
 const router = require('express').Router()
-const axios = require('axios')
+const { Framework } = require('../db/models')
+const axios = require('axios').create({
+  headers: {
+    Authorization: `token ${process.env.GITHUB_TOKEN}`,
+    Accept: 'application/vnd.github.v3+json'
+  }
+})
 module.exports = router
 
-// TODO: Decide on creating 1 parameterized route or having separate routes
-router.get('/react', async (req, res, next) => {
+// TODO: Replace hard-coded dates
+router.get('/stats', async (req, res, next) => {
   try {
-    const { data: repo } = await axios.get('https://api.github.com/repos/facebook/react', {
-      headers: {
-        Authorization: `token ${process.env.GITHUB_TOKEN}`,
-        Accept: 'application/vnd.github.v3+json'
-      }
+    const frameworks = await Framework.findAll({
+      attributes: ['githubPath']
     })
-    res.json(repo)
+    const repoAddresses = frameworks.map(framework => framework.githubPath)
+
+    const repoPromises = repoAddresses.map(address => {
+      return axios.get(`https://api.github.com/repos/${address}`)
+    })
+    const prPromises = repoAddresses.map(address => {
+      return axios.get(`https://api.github.com/search/issues?q=repo:${address}+type:pr+merged:>=2018-07-13T05:00:00`)
+    })
+    const issuePromises = repoAddresses.map(address => {
+      return axios.get(`https://api.github.com/search/issues?q=repo:${address}+type:issue+updated:>=2018-07-13T05:00:00`)
+    })
+
+    const repos = await Promise.all(repoPromises)
+    const prs = await Promise.all(prPromises)
+    const issues = await Promise.all(issuePromises)
+
+    const response = {}
+    repoAddresses.forEach((address, i) => {
+      response[address] = {}
+      response[address].stars = repos[i].data.stargazers_count
+      response[address].prs = prs[i].data.items.length
+      response[address].issues = issues[i].data.items.length
+    })
+
+    res.json(response)
   } catch (error) {
-    console.error(error)
+    next(error)
   }
 })

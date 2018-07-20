@@ -6,10 +6,10 @@ async function seed() {
   console.log('db synced!')
 
   const frameworks = await Promise.all([
-    Framework.create({name: 'React', githubUrl: 'https://github.com/facebook/react'}),
-    Framework.create({name: 'Angular', githubUrl: 'https://github.com/angular/angular.js'}),
-    Framework.create({name: 'Ember', githubUrl: 'https://github.com/emberjs/ember.js'}),
-    Framework.create({name: 'Vue', githubUrl: 'https://github.com/vuejs/vue'}),
+    Framework.create({name: 'React', githubPath: 'facebook/react'}),
+    Framework.create({name: 'Angular', githubPath: 'angular/angular.js'}),
+    Framework.create({name: 'Ember', githubPath: 'emberjs/ember.js'}),
+    Framework.create({name: 'Vue', githubPath: 'vuejs/vue'}),
   ])
 
   const votes = await Promise.all([
