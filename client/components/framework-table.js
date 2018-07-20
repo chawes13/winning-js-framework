@@ -25,17 +25,22 @@ class FrameworkTable extends Component {
 
   sort = (data) => {
     const { column, direction } = this.state
-    if (direction === 'ascending') {
-      return data.sort((a, b) => a[column] > b[column])
-    } else {
-      return data.sort((a, b) => a[column] < b[column])
-    }
+    const sortVal = (direction === 'ascending') ? 1 : -1
+
+    return data.sort((a, b) => {
+      if (a[column] > b[column])
+        return sortVal
+      else if (a[column] < b[column])
+        return sortVal * -1
+      else
+        return 0
+    })
   }
 
   render() {
     const { column, direction } = this.state
     // This will retain the preferred sort order if/when new data is pushed from server
-    const sortedData = this.sort(this.props.frameworks)
+    const sortedData = this.sort(this.props.frameworks.slice())
 
     return (
       <Table sortable celled fixed>
