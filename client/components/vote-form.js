@@ -1,47 +1,69 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Form, Button } from 'semantic-ui-react'
+import { createPostVoteThunk } from '../store'
+
+const initialState = {
+  email: '',
+  framework: '',
+}
 
 class VoteForm extends Component {
   constructor() {
     super()
-    this.state = {
-      email: '',
-      framework: '',
-    }
+    this.state = initialState
   }
 
-  handleChange = (event) => {
+  handleChange = (event, { name, value }) => {
     this.setState({
-      [event.target.name]: event.target.value
+      [name]: value
     })
   }
 
   handleSubmit = (event) => {
     event.preventDefault()
-    console.log('Form submitted', this.state)
+    this.props.submitVote(this.state)
+    this.setState(initialState)
   }
 
   render() {
-    const options = this.props.frameworks.map(framework => framework.name).sort()
+    const options = this.props.frameworks.map(framework => framework.name).sort().map(option => (
+      { key: option, value: option, text: option}
+    ))
 
     return (
-      <form onChange={this.handleChange} onSubmit={this.handleSubmit}>
+      <Form onSubmit={this.handleSubmit}>
         <h2>Vote here!</h2>
-        <input type="email" name="email" placeholder="sara@example.com" />
-        <select name="framework">
-          <option value="">--</option>
-          {
-            options.sort().map(option => (
-              <option key={option} value={option}>{option}</option>
-            ))
-          }
-        </select>
-        <button type="submit" disabled={!this.state.email || !this.state.framework}>Vote</button>
-      </form>
+        <Form.Group widths="equal">
+          <Form.Input
+            fluid
+            type="email"
+            label="Email"
+            name="email"
+            placeholder="sara@example.com"
+            value={this.state.email}
+            onChange={this.handleChange}
+          />
+          <Form.Select
+            fluid
+            name="framework"
+            label="Framework"
+            placeholder="Select a Framework"
+            options={options}
+            value={this.state.framework}
+            onChange={this.handleChange}
+          />
+        </Form.Group>
+        <Button type="submit" disabled={!this.state.email || !this.state.framework}>Vote</Button>
+      </Form>
     )
   }
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+    submitVote: (vote) => dispatch(createPostVoteThunk(vote))
+  }
+}
 
-
-export default connect()(VoteForm)
+export default connect(null, mapDispatchToProps)(VoteForm)

@@ -2,28 +2,28 @@
 let initData = [
   {
     id: 1,
-    name: "react",
+    name: "React",
     stars: 5,
     "pull-requests": 10,
     issues: 300,
   },
   {
     id: 2,
-    name: "ember",
+    name: "Ember",
     stars: 2,
     "pull-requests": 8,
     issues: 250,
   },
   {
     id: 3,
-    name: "vue",
+    name: "Vue",
     stars: 1,
     "pull-requests": 16,
     issues: 12,
   },
   {
     id: 4,
-    name: "angular",
+    name: "Angular",
     stars: 10,
     "pull-requests": 0,
     issues: 500,

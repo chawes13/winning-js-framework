@@ -43,7 +43,7 @@ router.post('/', async (req, res, next) => {
       }
     } else {
       const error = new Error('Selected framework is not eligible for voting')
-      error.status(400)
+      error.status = 400
       next(error)
     }
   } catch(error) {

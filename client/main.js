@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { createGetVotesThunk } from './store'
 import VoteForm from './components/vote-form'
 import FrameworkTable from './components/framework-table'
+import { Container } from 'semantic-ui-react'
 
 class Main extends Component {
 
@@ -16,7 +17,7 @@ class Main extends Component {
     if (error) return <div>Oops! An error occurred: {error} </div>
 
     return (
-      <div>
+      <Container>
         <h2>Frameworks</h2>
           <FrameworkTable frameworks={frameworks} />
         <h2>Votes</h2>
@@ -28,8 +29,8 @@ class Main extends Component {
             </div>
           ))
         }
-      <VoteForm frameworks={frameworks} />
-      </div>
+        <VoteForm frameworks={frameworks} />
+      </Container>
     )
   }
 }

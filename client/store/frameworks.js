@@ -37,6 +37,18 @@ export const createGetVotesThunk = () => {
   }
 }
 
+export const createPostVoteThunk = (vote) => {
+  return async dispatch => {
+    try {
+      const {data: response} = await axios.post('/api/votes', vote)
+      // TODO: Update store to send response
+      dispatch(createGetVotesThunk())
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
 // reducer
 export default function(state = initialState, action) {
   switch (action.type) {
