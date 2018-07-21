@@ -43,46 +43,49 @@ class FrameworkTable extends Component {
     const sortedData = this.sort(this.props.frameworks.slice())
 
     return (
-      <Table sortable celled fixed>
-        <Table.Header>
-          <Table.Row>
-            <Table.HeaderCell
-              sorted={column === 'name' ? direction : null}
-              onClick={() => this.handleSort('name')}
-            >
-              Name
-            </Table.HeaderCell>
-            <Table.HeaderCell
-              sorted={column === 'stars' ? direction : null}
-              onClick={() => this.handleSort('stars')}
-            >
-              Stars
-            </Table.HeaderCell>
-            <Table.HeaderCell
-              sorted={column === 'pullRequests' ? direction : null}
-              onClick={() => this.handleSort('pullRequests')}
-            >
-              Merged Pull Requests (last 7 days)
-            </Table.HeaderCell>
-            <Table.HeaderCell
-              sorted={column === 'activeIssues' ? direction : null}
-              onClick={() => this.handleSort('activeIssues')}
-            >
-              Updated Issues (last 7 days)
-            </Table.HeaderCell>
-          </Table.Row>
-        </Table.Header>
-        <Table.Body>
-          { sortedData.map(framework => (
-              <Table.Row key={framework.name}>
-                <Table.Cell><a href={`https://github.com/${framework.githubPath}`} target="_blank" rel="noopener noreferrer">{framework.name}</a></Table.Cell>
-                <Table.Cell>{framework.stars.toLocaleString()}</Table.Cell>
-                <Table.Cell>{framework.pullRequests.toLocaleString()}</Table.Cell>
-                <Table.Cell>{framework.activeIssues.toLocaleString()}</Table.Cell>
-              </Table.Row>
-          ))}
-        </Table.Body>
-      </Table>
+      <div>
+        <h2>Frameworks</h2>
+        <Table sortable celled fixed>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell
+                sorted={column === 'name' ? direction : null}
+                onClick={() => this.handleSort('name')}
+              >
+                Name
+              </Table.HeaderCell>
+              <Table.HeaderCell
+                sorted={column === 'stars' ? direction : null}
+                onClick={() => this.handleSort('stars')}
+              >
+                Stars
+              </Table.HeaderCell>
+              <Table.HeaderCell
+                sorted={column === 'pullRequests' ? direction : null}
+                onClick={() => this.handleSort('pullRequests')}
+              >
+                Merged Pull Requests (last 7 days)
+              </Table.HeaderCell>
+              <Table.HeaderCell
+                sorted={column === 'activeIssues' ? direction : null}
+                onClick={() => this.handleSort('activeIssues')}
+              >
+                Updated Issues (last 7 days)
+              </Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
+            { sortedData.map(framework => (
+                <Table.Row key={framework.name}>
+                  <Table.Cell><a href={`https://github.com/${framework.githubPath}`} target="_blank" rel="noopener noreferrer">{framework.name}</a></Table.Cell>
+                  <Table.Cell>{framework.stars.toLocaleString()}</Table.Cell>
+                  <Table.Cell>{framework.pullRequests.toLocaleString()}</Table.Cell>
+                  <Table.Cell>{framework.activeIssues.toLocaleString()}</Table.Cell>
+                </Table.Row>
+            ))}
+          </Table.Body>
+        </Table>
+      </div>
     )
   }
 }

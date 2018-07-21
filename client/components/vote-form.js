@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import { Form, Button } from 'semantic-ui-react'
-import { createPostVoteThunk } from '../store'
 
 const initialState = {
   email: '',
@@ -22,7 +20,8 @@ class VoteForm extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    this.props.submitVote(this.state)
+    this.props.handleVote(this.state)
+    // TODO: only reset state if vote is successful
     this.setState(initialState)
   }
 
@@ -54,16 +53,10 @@ class VoteForm extends Component {
             onChange={this.handleChange}
           />
         </Form.Group>
-        <Button type="submit" disabled={!this.state.email || !this.state.framework}>Vote</Button>
+        <Button primary block type="submit" disabled={!this.state.email || !this.state.framework}>Vote</Button>
       </Form>
     )
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    submitVote: (vote) => dispatch(createPostVoteThunk(vote))
-  }
-}
-
-export default connect(null, mapDispatchToProps)(VoteForm)
+export default VoteForm
