@@ -1,7 +1,7 @@
 const router = require('express').Router()
 module.exports = router
 
-router.use('/github', require('./github'))
+router.use('/frameworks', require('./frameworks'))
 router.use('/votes', require('./votes'))
 
 // 404 handler

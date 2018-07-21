@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { createGetVotesThunk } from './store'
+import { createGetVotesThunk, createGetFrameworksThunk } from './store'
 import VoteForm from './components/vote-form'
 import FrameworkTable from './components/framework-table'
 import { Container, Dimmer, Loader } from 'semantic-ui-react'
@@ -8,19 +8,22 @@ import { Container, Dimmer, Loader } from 'semantic-ui-react'
 class Main extends Component {
 
   componentDidMount() {
-    this.props.getVotes()
+    // this.props.getVotes()
+    this.props.getInitialFrameworks()
   }
 
   render() {
     const { frameworks, votes, loading, error } = this.props
-    if (frameworks.length === 0 && loading) return (
+    if (error) return <div>Oops! An error occurred: {error} </div>
+    // TODO: refactor the store to have isFetching separated for votes and frameworks
+    if (frameworks.length === 0 || loading) return (
       <div>
         <Dimmer active inverted>
           <Loader inverted content="Loading..." />
         </Dimmer>
       </div>
     )
-    if (error) return <div>Oops! An error occurred: {error} </div>
+
 
     return (
       <Container>
@@ -43,7 +46,8 @@ class Main extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getVotes: () => dispatch(createGetVotesThunk())
+    getVotes: () => dispatch(createGetVotesThunk()),
+    getInitialFrameworks: () => dispatch(createGetFrameworksThunk())
   }
 }
 
