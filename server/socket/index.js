@@ -9,7 +9,7 @@ const moment = require('moment')
 
 const updateFrameworkStats = async () => {
   try {
-    const lastWeek = moment().subtract(7, 'd').hour(0).format()
+    const lastWeek = moment().subtract(7, 'd').format('YYYY-MM-DD')
     const frameworks = await Framework.findAll({
       attributes: ['id', 'name', 'githubPath']
     })
