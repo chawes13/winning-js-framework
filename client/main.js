@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { createGetVotesThunk, createGetFrameworksThunk, createPostVoteThunk } from './store'
 import VoteForm from './components/vote-form'
 import FrameworkTable from './components/framework-table'
+import Navbar from './components/navbar'
 import { Container, Dimmer, Message, Loader } from 'semantic-ui-react'
 
 class Main extends Component {
@@ -47,26 +48,29 @@ class Main extends Component {
 
     return (
       <Container>
-        { (!!voteError && !this.state.hideFlashMsg) && (
-          <Message
-            negative
-            icon="exclamation triangle"
-            header="Vote Unsuccessful"
-            content={`Your vote failed for the following reason: ${voteError}`}
-            onDismiss={this.handleDismiss}
-          />
-        )}
-        { (!!voteSuccess && !this.state.hideFlashMsg) && (
-          <Message
-            positive
-            icon="check circle outline"
-            header="Vote Recorded"
-            content={voteSuccess}
-            onDismiss={this.handleDismiss}
-          />
-        )}
-        <FrameworkTable frameworks={frameworks} />
-        <VoteForm frameworks={frameworks} handleVote={this.handleVote} />
+        <Navbar />
+        <div id="dashboard">
+          { (!!voteError && !this.state.hideFlashMsg) && (
+            <Message
+              negative
+              icon="exclamation triangle"
+              header="Vote Unsuccessful"
+              content={`Your vote failed for the following reason: ${voteError}`}
+              onDismiss={this.handleDismiss}
+            />
+          )}
+          { (!!voteSuccess && !this.state.hideFlashMsg) && (
+            <Message
+              positive
+              icon="check circle outline"
+              header="Vote Recorded"
+              content={voteSuccess}
+              onDismiss={this.handleDismiss}
+            />
+          )}
+          <FrameworkTable frameworks={frameworks} />
+          <VoteForm frameworks={frameworks} handleVote={this.handleVote} />
+        </div>
       </Container>
     )
   }
