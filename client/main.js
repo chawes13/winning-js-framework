@@ -30,7 +30,7 @@ class Main extends Component {
         hideFlashMsg: false,
       }, () => this.props.submitVote(vote))
     } else {
-      this.props.submitVote(vote)
+      return this.props.submitVote(vote)
     }
   }
 

@@ -44,6 +44,7 @@ export const createPostVoteThunk = (vote) => {
       dispatch(createSubmitVoteAction())
       const {data: message} = await axios.post('/api/votes', vote)
       dispatch(createSubmitVoteSuccessAction(message))
+      return true
     } catch (error) {
       console.error(error)
       dispatch(createSubmitVoteErrorAction(error.message))

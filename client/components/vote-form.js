@@ -18,11 +18,12 @@ class VoteForm extends Component {
     })
   }
 
-  handleSubmit = (event) => {
+  handleSubmit = async (event) => {
     event.preventDefault()
-    this.props.handleVote(this.state)
-    // TODO: only reset state if vote is successful
-    this.setState(initialState)
+    const success = await this.props.handleVote(this.state)
+    if (success) {
+      this.setState(initialState)
+    }
   }
 
   render() {
