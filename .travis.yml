@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+  - node
+services:
+  - postgresql
+addons:
+  postgresql: '9.6'
+dist: trusty
+sudo: false
+notifications:
+  email:
+    on_success: change
+    on_failure: always
+install:
+  - npm ci
+before_script:
+  - psql -c 'create database "winning-framework-test";' -U postgres
