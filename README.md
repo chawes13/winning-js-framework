@@ -14,7 +14,7 @@ The purpose of this application is to facilitate the comparison and selection of
    process.env.SESSION_SECRET = 'abc' // your darkest secret (or anything, really)
    process.env.GITHUB_TOKEN = 'xyz' // your GitHub token generated above
    process.env.GITHUB_API_INTERVAL = 30000 // time (in ms) between API calls with at least 1 user connected
-   process.env.GITHUB_API_MAX_INTERVAL = 900000 // maximum time (in ms) betweeen API calls
+   process.env.GITHUB_API_MAX_INTERVAL = 900000 // maximum time (in ms) between API calls
    ```
 1. Run tests with `npm test` or `npm run test-watch`
 1. Seed the DB with the appropriate frameworks using `npm run seed`
@@ -26,7 +26,7 @@ The purpose of this application is to facilitate the comparison and selection of
 * [React](https://reactjs.org/docs/getting-started.html) with [Redux](https://redux.js.org/basics/usage-with-react)
 * [Node.js](https://nodejs.org/en/docs/)
 * [Express](https://expressjs.com/en/4x/api.html)
-* [GitHub's REST API (v3)](https://developer.github.com/v3/)
+* [GitHub REST API (v3)](https://developer.github.com/v3/)
 * [Socket.io](https://socket.io/docs/)
 * [Sequelize](http://docs.sequelizejs.com/manual/installation/getting-started.html)
 * [PostgreSQL](https://www.postgresql.org/docs/)
@@ -38,7 +38,7 @@ The purpose of this application is to facilitate the comparison and selection of
 
 The data presented on the dashboard is retrieved from the database via a Redux thunk after the application's main component first mounts. Given the fluid JavaScript ecosystem, it is entirely possible for a framework to come in or out-of fashion in a relatively short period of time. Since framework information is pulled dynamically from the database, the application can easily be extended in the future to add/remove JavaScript frameworks.
 
-To display the frameworks and their associated data in a sortable table, I used the Semantic UI React library of React Higher-Order Components. By default, the table is sorted alphabetically by name in acending order. If the user clicks the table header for the column that is currently sorted (indicated by presence of an arrow icon), then the direction of the sort will flip (indicated by the direction of the arrow icon). Clicking on another header will by default sort the column in ascending order, which can be changed to descending with another click. If more frameworks and data points for comparison were added, this feature could be extended to allow for combined sorting (e.g., sort by name ASC, then stars DESC).
+To display the frameworks and their associated data in a sortable table, I used the Semantic UI React library of React Higher-Order Components. By default, the table is sorted alphabetically by name in ascending order. If the user clicks the table header for the column that is currently sorted (indicated by presence of an arrow icon), then the direction of the sort will flip (indicated by the direction of the arrow icon). Clicking on another header will by default sort the column in ascending order, which can be changed to descending with another click. If more frameworks and data points for comparison were added, this feature could be extended to allow for combined sorting (e.g., sort by name ASC, then stars DESC).
    
 **Display the 3 most relevant pieces of information.**
 
@@ -65,7 +65,7 @@ In addition to the criteria above, I think that weekly downloads is a decent heu
 
 **Show updates to the the dashboard without a page refresh.**
 
-Live updates from the GitHub API are emitted to all connected clients using websockets powered by `socket.io`. When a client recieves a `server:new-data` message, it dispatches an action to the Redux store which updates the data held in state and re-renders the dashboard components with the updated information. As a result, a user does not have to refresh their page to see the most up-to-date information for these selected frameworks.
+Live updates from the GitHub API are emitted to all connected clients using websockets powered by `socket.io`. When a client receives a `server:new-data` message, it dispatches an action to the Redux store which updates the data held in state and re-renders the dashboard components with the updated information. As a result, a user does not have to refresh their page to see the most up-to-date information for these selected frameworks.
 
 I implemented the API calls using `setTimeout` with two different intervals: one for when a client is connected and one for the maximum allowable interval. This design decision was informed by the fact that the information presented is not critical enough to warrant truly "live" updates on a second-by-second basis and also to mitigate for GitHub's API rate limiting. If at least one client is connected, then the GitHub API will be polled at frequent intervals (defaulted to 15 seconds). Otherwise, the API will eventually be polled when a max interval (defaulted to 15 minutes) is reached to ensure that the application generally stays up-to-date.
 
@@ -75,7 +75,7 @@ An alternative approach that I considered was to use in-memory caching for the `
 
 **Capture a single vote for a given framework per user email address and browser session.**
 
-A vote is submitted via a Redux thunk that makes an http request to the `/api/votes` POST route. By using the `express-session` npm package, browser session id information is included on the request object. The application uses this session id and the submitted email and framework choice to either find or create a vote record on the `votes` table. If a particular email + browser session has already voted for a framework, then the business logic will check to see if the vote has changed and will update the existing vote accordingly. Otherwise, a new vote will be created with that user's selected framework.
+A vote is submitted via a Redux thunk that makes an http request to the `/api/votes` POST route. By using the `express-session` npm package, browser session id information is included on the request object. The application uses this session id and the submitted email and framework choice to either find or create a vote record on the `votes` table. If a particular email + browser session has already voted for a framework, then the business logic will check to see if the vote has changed and will update the existing vote accordingly. Otherwise, a new vote will be created with that user's selected framework. A user will be informed of the result of their submission by a dismissable flash message at the top of the dashboard.
 
 **Expose the tally of total votes for each framework via a single API route.**
 
