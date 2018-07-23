@@ -11,7 +11,7 @@ const socketio = require('socket.io')
 
 module.exports = app
 
-if (process.env.NODE_ENV !== 'production') require('../secrets')
+if (process.env.NODE_ENV === 'development') require('../secrets')
 
 // Creating as a function for ease of testing
 const createApp = () => {
