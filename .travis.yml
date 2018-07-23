@@ -15,3 +15,6 @@ install:
   - npm ci
 before_script:
   - psql -c 'create database "winning-framework-test";' -U postgres
+branches:
+  only:
+    - master # will only run when impacting master
