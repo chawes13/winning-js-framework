@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { createGetVotesThunk, createGetFrameworksThunk, createPostVoteThunk } from './store'
+import { createGetFrameworksThunk, createPostVoteThunk } from './store'
 import VoteForm from './components/vote-form'
 import FrameworkTable from './components/framework-table'
 import Navbar from './components/navbar'
@@ -78,7 +78,6 @@ class Main extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getVotes: () => dispatch(createGetVotesThunk()),
     getInitialFrameworks: () => dispatch(createGetFrameworksThunk()),
     submitVote: (vote) => dispatch(createPostVoteThunk(vote))
   }
@@ -89,7 +88,6 @@ const mapStateToProps = state => {
     frameworks: state.frameworks.data,
     frameworksLoading: state.frameworks.isFetching,
     frameworksError: state.frameworks.errorMsg,
-    votes: state.votes.data,
     voteError: state.votes.errorMsg,
     voteSuccess: state.votes.successMsg,
   }
