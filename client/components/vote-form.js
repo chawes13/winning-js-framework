@@ -54,7 +54,7 @@ class VoteForm extends Component {
             onChange={this.handleChange}
           />
         </Form.Group>
-        <Button primary block type="submit" disabled={!this.state.email || !this.state.framework}>Vote</Button>
+        <Button positive fluid type="submit" disabled={!this.state.email || !this.state.framework}>Vote</Button>
       </Form>
     )
   }
