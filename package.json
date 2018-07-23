@@ -10,7 +10,7 @@
     "start": "node server",
     "start-dev": "NODE_ENV='development' npm run build-client-watch & npm run start-server",
     "start-server": "nodemon server -e html,js,scss --ignore public --ignore client",
-    "test": "jest --runInBand --forceExit",
+    "test": "jest --runInBand --silent --forceExit",
     "test-watch": "jest --watch --runInBand"
   },
   "keywords": [
@@ -60,6 +60,7 @@
   },
   "devDependencies": {
     "@babel/polyfill": "^7.0.0-beta.54",
+    "axios-mock-adapter": "^1.15.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.6",
     "babel-jest": "^23.4.0",
@@ -71,6 +72,7 @@
     "jest": "^23.4.1",
     "mocha": "^5.2.0",
     "nodemon": "^1.18.3",
+    "redux-mock-store": "^1.5.3",
     "regenerator-runtime": "^0.12.0",
     "supertest": "^3.1.0",
     "webpack": "^4.16.1",

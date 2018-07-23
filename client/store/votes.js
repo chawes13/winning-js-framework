@@ -32,7 +32,6 @@ export const createGetVotesThunk = () => {
       const {data: votes} = await axios.get('/api/votes')
       dispatch(createGotVotesAction(votes))
     } catch (error) {
-      console.error(error)
       dispatch(createGetVotesErrorAction(error.message))
     }
   }
@@ -46,7 +45,6 @@ export const createPostVoteThunk = (vote) => {
       dispatch(createSubmitVoteSuccessAction(message))
       return true
     } catch (error) {
-      console.error(error)
       dispatch(createSubmitVoteErrorAction(error.message))
     }
   }
