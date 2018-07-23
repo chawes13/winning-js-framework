@@ -3,10 +3,6 @@ import store, { createGotUpdatedFrameworksAction } from './store'
 
 const socket = io(window.location.origin)
 
-socket.on('connect', () => {
-  console.log('Connected!')
-})
-
 socket.on('server:new-data', data => {
   store.dispatch(createGotUpdatedFrameworksAction(data))
 })
