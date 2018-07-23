@@ -5,8 +5,8 @@ class FrameworkTable extends Component {
   constructor() {
     super()
     this.state = {
-      column: null,
-      direction: null,
+      column: 'name',
+      direction: 'ascending',
     }
   }
 
