@@ -31,8 +31,8 @@ const updateFrameworkStats = async () => {
     const updatedFrameworks = await Promise.all(frameworks.map((framework, i) =>  {
       return framework.update({
         stars: repos[i].data.stargazers_count,
-        pullRequests: prs[i].data.items.length,
-        activeIssues: issues[i].data.items.length,
+        pullRequests: prs[i].data.total_count,
+        activeIssues: issues[i].data.total_count,
       })
     }))
 
