@@ -23,10 +23,10 @@ class Dashboard extends Component {
     if (this.state.hideFlashMsg) {
       this.setState({
         hideFlashMsg: false,
-      }, () => this.props.submitVote(vote))
-    } else {
-      return this.props.submitVote(vote)
+      })
     }
+
+    return this.props.submitVote(vote)
   }
 
   render() {
