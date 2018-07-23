@@ -4,6 +4,7 @@
   "description": "A comparison tool to help pick the best JS client-side framework",
   "main": "index.js",
   "scripts": {
+    "build-client": "webpack",
     "build-client-watch": "webpack -w",
     "deploy": "script/deploy",
     "seed": "node script/seed.js",

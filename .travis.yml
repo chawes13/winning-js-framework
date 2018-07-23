@@ -1,0 +1,30 @@
+language: node_js
+node_js:
+  - node
+services:
+  - postgresql
+addons:
+  postgresql: '9.6'
+dist: trusty
+sudo: false
+notifications:
+  email:
+    on_success: change
+    on_failure: always
+install:
+  - npm ci
+before_script:
+  - psql -c 'create database "winning-framework-test";' -U postgres
+branches:
+  only:
+    - master # will only run when impacting master
+
+before_deploy:
+  - npm run build-client
+  - rm -rf node_modules
+deploy:
+  skip_cleanup: true
+  provider: heroku
+  app: winning-js-framework
+  api_key:
+    secure: li2u1Ab4rDwcP+lwHJs3Z+WAsnFkAgqBivGghxkivfrvvzqGKM7a+7ctPGEg1lwxY6CGoJ6He6Ml2wfrhjAuZZuS1ZJCkjRkvH5nd/XMHdf0UKEYY8uYQsKW+0M0NTS5TmTSIRERdbQLX7x9aSghIRrZz63E1Gvx0eImhkLoLxhLCz+lMHyU0c4qkauxxmbjoGJsFDomcNz9iY/5sHM25oorxvZon2xee17Lz7h4traOdnoyVhhbH0cTMCH4EO2kQLTXF5YgBeEBIvWkzIynU4sOs0kDwDxUuydDN8wYc+I9dSxWzErvgOzUDdxlSoFoqXI7b01OBj/Hmq50+7MP/ttBneizDXnBLPcTyNXRqJu9KvE/Bxf7fKBCy0fWqxKwLlkNyo5otS/6iS3rGuPZOY/ocj7AnBEwq5/ePCZWrNz8j9bw+ftEJNH6xVx2hYRS6ruT6X3t02gC/zpY+G9D3LjUt03PqXkMbUjSn9THb+CnJFG3VPRYozRtGufrl50gxu9N13VPxj9pm68RD7TN8GE4qYZk3gEJt6+zupHk++IYFh7fTJvbRwpA0PDhaSwu8THvIcz37KRQTKqrZji2WnIw5HED+9cfmcBYeqUKpZYvO6tiFR5bVyuLwmUsxZgo4HmFinqy7C2XuYr4EhXr2QLDjk4x/HuNAHFPIgrIO+c=
