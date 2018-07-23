@@ -78,9 +78,9 @@ class FrameworkTable extends Component {
             { sortedData.map(framework => (
                 <Table.Row key={framework.name}>
                   <Table.Cell><a href={`https://github.com/${framework.githubPath}`} target="_blank" rel="noopener noreferrer">{framework.name}</a></Table.Cell>
-                  <Table.Cell>{framework.stars.toLocaleString()}</Table.Cell>
-                  <Table.Cell>{framework.pullRequests.toLocaleString()}</Table.Cell>
-                  <Table.Cell>{framework.activeIssues.toLocaleString()}</Table.Cell>
+                  <Table.Cell textAlign="right">{framework.stars.toLocaleString()}</Table.Cell>
+                  <Table.Cell textAlign="right">{framework.pullRequests.toLocaleString()}</Table.Cell>
+                  <Table.Cell textAlign="right">{framework.activeIssues.toLocaleString()}</Table.Cell>
                 </Table.Row>
             ))}
           </Table.Body>
