@@ -27,7 +27,6 @@ export const createGetFrameworksThunk = () => {
       const {data: frameworks} = await axios.get('/api/frameworks')
       dispatch(createGotFrameworksAction(frameworks))
     } catch (error) {
-      console.error(error)
       dispatch(createGetFrameworksErrorAction(error.message))
     }
   }
