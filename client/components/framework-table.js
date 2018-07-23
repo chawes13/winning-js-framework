@@ -43,7 +43,7 @@ class FrameworkTable extends Component {
     const sortedData = this.sort(this.props.frameworks.slice())
 
     return (
-      <div>
+      <div id="frameworks-table">
         <h2>Frameworks</h2>
         <Table sortable celled fixed>
           <Table.Header>
