@@ -1,4 +1,4 @@
-# "Winning" JavaScript Framework
+# "Winning" JavaScript Framework [![Build Status](https://travis-ci.org/chawes13/winning-js-framework.svg?branch=master)](https://travis-ci.org/chawes13/winning-js-framework)
 The purpose of this application is to facilitate the comparison and selection of the "winning" JavaScript client-side framework for a project based on GitHub activity. Users can view and sort popular JavaScript frameworks based on total Stars and weekly Merged Pull Requests and Updated Issues to get a sense for each framework's development activity, community support, and stability. Once a user has made their decision, they can submit their vote for the "winning" JavaScript framework.
 
 [View Deployed Application](https://winning-js-framework.herokuapp.com/)
