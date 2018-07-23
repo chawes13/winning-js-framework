@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, Button } from 'semantic-ui-react'
+import { Button, Form, Segment } from 'semantic-ui-react'
 
 const initialState = {
   email: '',
@@ -32,9 +32,8 @@ class VoteForm extends Component {
     ))
 
     return (
-      <Form onSubmit={this.handleSubmit}>
-        <h2>Vote here!</h2>
-        <Form.Group widths="equal">
+      <Segment id="vote-form-card">
+        <Form onSubmit={this.handleSubmit}>
           <Form.Input
             fluid
             type="email"
@@ -53,9 +52,9 @@ class VoteForm extends Component {
             value={this.state.framework}
             onChange={this.handleChange}
           />
-        </Form.Group>
-        <Button positive fluid type="submit" disabled={!this.state.email || !this.state.framework}>Vote</Button>
-      </Form>
+          <Button id="vote-btn" positive fluid type="submit" disabled={!this.state.email || !this.state.framework}>Vote</Button>
+        </Form>
+      </Segment>
     )
   }
 }

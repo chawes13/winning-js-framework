@@ -4,7 +4,7 @@ import { createGetFrameworksThunk, createPostVoteThunk } from './store'
 import VoteForm from './components/vote-form'
 import FrameworkTable from './components/framework-table'
 import Navbar from './components/navbar'
-import { Container, Dimmer, Message, Loader } from 'semantic-ui-react'
+import { Container, Dimmer, Divider, Message, Loader } from 'semantic-ui-react'
 
 class Main extends Component {
 
@@ -47,9 +47,9 @@ class Main extends Component {
     )
 
     return (
-      <Container>
+      <div>
         <Navbar />
-        <div id="dashboard">
+        <Container id="dashboard">
           { (!!voteError && !this.state.hideFlashMsg) && (
             <Message
               negative
@@ -69,9 +69,10 @@ class Main extends Component {
             />
           )}
           <FrameworkTable frameworks={frameworks} />
+          <Divider horizontal id="divider">Vote Here!</Divider>
           <VoteForm frameworks={frameworks} handleVote={this.handleVote} />
-        </div>
-      </Container>
+        </Container>
+      </div>
     )
   }
 }
